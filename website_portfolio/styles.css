@@ -1,0 +1,482 @@
+/*
+ * Global Styles
+ *
+ * This stylesheet uses CSS custom properties to define the dark color palette.
+ * A deep gray background serves as the base instead of pure black to reduce
+ * visual fatigue【641179685920571†L355-L374】. White text and a muted blue accent color
+ * ensure adequate contrast. The design emphasises subtlety over bright
+ * colors【641179685920571†L392-L404】 and avoids heavy shadows for a clean, professional
+ * look【641179685920571†L481-L487】.
+ */
+
+:root {
+  /* Light theme colour palette */
+  --background-color: #f5f7fa;    /* very light gray background for sections */
+  --surface-color: #ffffff;       /* pure white for cards and surfaces */
+  --primary-color: #2563eb;       /* vibrant blue for accents */
+  --secondary-color: #1e3a8a;     /* deeper blue for navigation bar */
+  --text-color: #1f2937;          /* dark gray for primary text */
+  --muted-text-color: #6b7280;    /* medium gray for secondary text */
+  --border-radius: 8px;
+  --transition: 0.3s ease;
+}
+
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+/* Navigation Bar */
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  /* Use a subtle gradient for the navigation bar to create a more dynamic look */
+  background-image: linear-gradient(90deg, var(--secondary-color) 0%, var(--primary-color) 100%);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+nav .logo {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #ffffff; /* ensure logo text is visible on dark nav */
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+  margin: 0;
+  padding: 0;
+}
+
+nav a {
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color var(--transition);
+}
+
+nav a:hover {
+  color: var(--primary-color);
+}
+
+/* Hero Section */
+.hero {
+  background-image: url('f6d565ce-efb0-4a44-a74a-853c8edcb658.png');
+  background-size: cover;
+  background-position: center;
+  padding: 4rem 2rem;
+  text-align: center;
+  color: #ffffff;
+  position: relative;
+}
+
+/* Add a subtle coloured overlay on the hero image to make it brighter and cohesive */
+.hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  /* Use a semi‑transparent light blue overlay to brighten the dark hero image */
+  background: rgba(37, 99, 235, 0.5);
+  z-index: 0;
+}
+
+/* Ensure hero text sits above the overlay */
+.hero > * {
+  position: relative;
+  z-index: 1;
+}
+
+.hero h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.hero p {
+  font-size: 1.25rem;
+  max-width: 700px;
+  margin: 0 auto;
+  color: #e0ecff; /* slightly brighter blue for readability */
+}
+
+/* Sections */
+.section {
+  padding: 4rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: var(--primary-color);
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.card {
+  background-color: var(--surface-color);
+  border-radius: var(--border-radius);
+  padding: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  transition: transform var(--transition), box-shadow var(--transition);
+  cursor: pointer;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+}
+
+.card h3 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+.card p {
+  margin: 0;
+  color: var(--muted-text-color);
+  font-size: 0.9rem;
+}
+
+.btn {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.6rem 1.2rem;
+  background-color: var(--primary-color);
+  color: #fff;
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: background-color var(--transition);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.btn:hover {
+  background-color: var(--secondary-color);
+}
+
+/* About Page */
+.about-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.about-item {
+  background-color: var(--surface-color);
+  padding: 1.5rem;
+  border-radius: var(--border-radius);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.about-item h3 {
+  margin-top: 0;
+  color: var(--primary-color);
+  margin-bottom: 0.5rem;
+}
+
+.about-item p {
+  margin: 0;
+  color: var(--muted-text-color);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+/* Feature highlights on Home page */
+.features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.feature {
+  /* Use a gentle gradient for feature cards to make them more visually interesting */
+  background-image: linear-gradient(135deg, #ffffff 0%, #eef2ff 100%);
+  padding: 2rem 1.5rem;
+  border-radius: var(--border-radius);
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.feature:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+}
+
+.feature i {
+  font-size: 2rem;
+  color: var(--primary-color);
+  margin-bottom: 0.5rem;
+}
+
+.feature h3 {
+  margin: 0.5rem 0;
+  color: var(--primary-color);
+}
+
+.feature p {
+  margin: 0;
+  color: var(--muted-text-color);
+  font-size: 0.9rem;
+}
+
+/* Simple fade‑in animation for sections and elements */
+.fade-in-up {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Project page media layout */
+.project-media {
+  margin: 2rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.project-media iframe {
+  width: 100%;
+  height: 400px;
+  border: none;
+  border-radius: var(--border-radius);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+}
+
+.project-screenshots {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+.project-screenshots img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: var(--border-radius);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Testimonials layout */
+.testimonials {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.testimonial-card {
+  /* Gradient background and coloured border for testimonials */
+  background-image: linear-gradient(135deg, #ffffff 0%, #f3f4f6 100%);
+  border-left: 4px solid var(--primary-color);
+  padding: 1.5rem;
+  border-radius: var(--border-radius);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.testimonial-card p {
+  font-style: italic;
+  color: var(--muted-text-color);
+  margin: 0;
+}
+
+.testimonial-card span {
+  display: block;
+  margin-top: 0.5rem;
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+/* About page redesign */
+.subtitle {
+  color: var(--muted-text-color);
+  margin-top: -0.5rem;
+  margin-bottom: 2rem;
+  font-size: 1.1rem;
+  text-align: center;
+}
+
+.about-two-column {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.about-two-column > div {
+  flex: 1 1 280px;
+}
+
+/* Light gradient backgrounds for about cards */
+.journey-card,
+.stats-card {
+  background-image: linear-gradient(135deg, #ffffff 0%, #f3f4f6 100%);
+  padding: 2rem;
+  border-radius: var(--border-radius);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.stats-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.stat {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background-image: linear-gradient(135deg, #f9fafb 0%, #eef2ff 100%);
+  padding: 1rem;
+  border-radius: var(--border-radius);
+}
+
+.stat i {
+  font-size: 1.5rem;
+  color: var(--primary-color);
+}
+
+.stat span {
+  font-weight: 600;
+  font-size: 1.3rem;
+  color: var(--text-color);
+}
+
+.stat small {
+  color: var(--muted-text-color);
+  font-size: 0.8rem;
+  display: block;
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.skill-column h4 {
+  margin: 0 0 0.5rem;
+  font-size: 1.1rem;
+  color: var(--primary-color);
+}
+
+.skill-column ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.skill-column li {
+  color: var(--muted-text-color);
+  font-size: 0.9rem;
+  margin-bottom: 0.3rem;
+}
+
+/* Contact Form */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Contact form fields */
+.contact-form input,
+.contact-form textarea {
+  padding: 0.8rem;
+  border-radius: var(--border-radius);
+  border: 1px solid #d1d5db; /* lighter border for bright theme */
+  background-color: var(--surface-color);
+  color: var(--text-color);
+  font-size: 1rem;
+  outline: none;
+  transition: border var(--transition);
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border: 1px solid var(--primary-color);
+}
+
+.contact-form button {
+  padding: 0.8rem;
+  border: none;
+  border-radius: var(--border-radius);
+  background-color: var(--primary-color);
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color var(--transition);
+  width: 100%;
+}
+
+.contact-form button:hover {
+  background-color: var(--secondary-color);
+}
+
+/* Footer */
+footer {
+  background-color: var(--surface-color);
+  color: var(--muted-text-color);
+  padding: 1.5rem 2rem;
+  text-align: center;
+}
+
+footer .social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+footer .social-icons a {
+  color: var(--muted-text-color);
+  font-size: 1.5rem;
+  transition: color var(--transition);
+}
+
+footer .social-icons a:hover {
+  color: var(--primary-color);
+}
+
+@media (max-width: 600px) {
+  nav {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  nav ul {
+    margin-top: 0.5rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .hero {
+    padding: 3rem 1rem;
+  }
+}

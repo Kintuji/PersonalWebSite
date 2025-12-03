@@ -1,0 +1,444 @@
+<!--
+  Portfolio Website for Game Developer & AI Programmer
+
+  This simple static site uses React and Babel loaded from CDN to power a
+  single‑page application. It also includes a few secondary pages in the
+  ``projects/`` folder. The design follows modern dark mode guidelines by
+  choosing dark gray backgrounds instead of pure black and using white and
+  blue accents to maintain sufficient contrast and avoid eye strain【641179685920571†L355-L374】.  
+  The bright accent color is used sparingly for call‑to‑action elements and
+  links【641179685920571†L392-L404】.  
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Game Dev &amp; AI Programmer Portfolio</title>
+  <!-- Google Fonts for clean, modern typography -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <!-- Font Awesome for social icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-otkRWTfO+1tGAh2DP84uJKDE8o9tvCR69RqewKgk+pl3AXsE9oCSXoukujjTUvX0QFM+GAkVoiSWbjFazijjbg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <!-- Site stylesheet -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div id="root"></div>
+  <!-- React and Babel from CDN -->
+  <script src="https://unpkg.com/react@17/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <!-- Main script written in JSX. Embed the code directly so Babel
+       processes it correctly in the browser. -->
+  <script type="text/babel" data-presets="react">
+    /*
+     * React application powering the portfolio site.
+     *
+     * This code defines a single‑page app with four main sections: Home,
+     * Projects, About and Contact. Navigation is handled via simple state
+     * changes rather than a full router. When the user clicks on a project
+     * card the corresponding HTML file in the ``projects/`` folder is opened
+     * in a new browser tab.
+     */
+
+    const { useState } = React;
+
+    // Navigation component
+    function Navigation({ page, onNavigate }) {
+      const links = [
+        { id: 'home', label: 'Home' },
+        { id: 'projects', label: 'Projects' },
+        { id: 'about', label: 'About' },
+        { id: 'contact', label: 'Contact' },
+      ];
+      return (
+        <nav>
+          <div className="logo">Game Dev &amp; AI Programmer</div>
+          <ul>
+            {links.map((link) => (
+              <li key={link.id}>
+                <a
+                  href="#"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    onNavigate(link.id);
+                  }}
+                  /* Always use white text for navigation for maximum contrast; highlight the active link with an underline */
+                  style={{
+                    color: '#ffffff',
+                    fontWeight: page === link.id ? 600 : 500,
+                    borderBottom: page === link.id ? '2px solid var(--primary-color)' : 'none',
+                    paddingBottom: '2px',
+                  }}
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      );
+    }
+
+    // Home page
+    function Home({ projects }) {
+      return (
+        <div className="home-page">
+        <div className="hero fade-in-up">
+            <h1>Creating Worlds with Code &amp; Intelligence</h1>
+        <p>
+              I combine game development and AI engineering to craft unique,
+              immersive experiences across PC, mobile and the web. From polished
+              gameplay mechanics to smart, adaptive systems, my work bridges
+              creativity with cutting‑edge technology.
+            </p>
+          </div>
+          <section className="section fade-in-up">
+            <h2>What I Do</h2>
+            <p>
+              I specialise in designing and developing video games, leveraging AI to
+              build dynamic behaviours, procedural content and adaptive gameplay.
+              Whether it's a mobile puzzle or a large‑scale multiplayer title, I
+              deliver polished experiences across platforms.
+            </p>
+            {/* Feature highlights for game development and AI engineering */}
+            <Features />
+          </section>
+          <section className="section fade-in-up">
+            <h2>Latest Projects</h2>
+            <div className="card-grid">
+              {projects.slice(0, 3).map((project) => (
+                <div
+                  key={project.id}
+                  className="card"
+                  onClick={() => window.open(project.link, '_blank')}
+                >
+                  <h3>{project.title}</h3>
+                  <p>{project.description}</p>
+                  <span className="btn">View Details</span>
+                </div>
+              ))}
+            </div>
+          </section>
+        </div>
+      );
+    }
+
+    // Feature list component for Home page
+    function Features() {
+      return (
+        <div className="features fade-in-up">
+          <div className="feature">
+            <i className="fas fa-gamepad"></i>
+            <h3>Game Development</h3>
+            <p>
+              Crafting engaging gameplay loops, intuitive controls and polished
+              mechanics for immersive experiences.
+            </p>
+          </div>
+          <div className="feature">
+            <i className="fas fa-brain"></i>
+            <h3>AI Engineering</h3>
+            <p>
+              Building adaptive behaviours, reinforcement learning agents and smart
+              systems that react to player actions.
+            </p>
+          </div>
+          <div className="feature">
+            <i className="fas fa-cubes"></i>
+            <h3>Procedural Generation</h3>
+            <p>
+              Designing algorithms to generate dynamic worlds, levels and content
+              ensuring replayability and variety.
+            </p>
+          </div>
+        </div>
+      );
+    }
+
+    // Projects page
+    function Projects({ projects }) {
+      return (
+        <div className="section">
+          <h2>Projects</h2>
+          <p>Explore a selection of my work. Click a project to learn more.</p>
+          <div className="card-grid">
+            {projects.map((project) => (
+              <div
+                key={project.id}
+                className="card"
+                onClick={() => window.open(project.link, '_blank')}
+              >
+                <h3>{project.title}</h3>
+                <p>{project.description}</p>
+                <span className="btn">View Details</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      );
+    }
+
+    // About page
+    function About() {
+      return (
+        <div className="section">
+          {/* Page heading and tagline */}
+          <h2>About Me</h2>
+          <p className="subtitle">
+            Passionate game developer and AI engineer with a mission to create memorable
+            experiences.
+          </p>
+          {/* Two‑column layout: journey text and key stats */}
+          <div className="about-two-column">
+            {/* Journey / biography card */}
+            <div className="journey-card fade-in-up">
+              <h3>My Journey</h3>
+              <p>
+                I'm a game developer and AI engineer with over five years of experience
+                creating engaging games for PC, mobile and the web. My journey began
+                with a love for both playing and building games, leading me to pursue
+                a professional career in interactive entertainment. Over the years I've
+                worked on projects ranging from mobile puzzles to complex real‑time
+                strategy titles. I specialise in gameplay programming, system design
+                and optimisation, always striving to deliver smooth and enjoyable
+                player experiences. Combining technical expertise with creative
+                problem‑solving, I believe that great games are built on solid systems
+                and polished mechanics. I'm committed to continuous learning and
+                staying current with industry trends.
+              </p>
+            </div>
+            {/* Stats card highlighting years, games shipped and downloads */}
+            <div className="stats-card fade-in-up">
+              <div className="stat">
+                <i className="fas fa-briefcase"></i>
+                <div>
+                  <span>5+ Years</span>
+                  <small>Game Development Experience</small>
+                </div>
+              </div>
+              <div className="stat">
+                <i className="fas fa-gamepad"></i>
+                <div>
+                  <span>10+ Games</span>
+                  <small>Published &amp; Shipped</small>
+                </div>
+              </div>
+              <div className="stat">
+                <i className="fas fa-download"></i>
+                <div>
+                  <span>2M+ Downloads</span>
+                  <small>Across All Projects</small>
+                </div>
+              </div>
+            </div>
+          </div>
+          {/* Technical skills grid */}
+          <h3>Technical Skills</h3>
+          <div className="skills-grid">
+            <div className="skill-column">
+              <h4>Game Engines</h4>
+              <ul>
+                <li>Unity</li>
+                <li>Unreal Engine</li>
+                <li>Godot</li>
+              </ul>
+            </div>
+            <div className="skill-column">
+              <h4>Programming</h4>
+              <ul>
+                <li>C#</li>
+                <li>C++</li>
+                <li>JavaScript</li>
+                <li>Python</li>
+              </ul>
+            </div>
+            <div className="skill-column">
+              <h4>Platforms</h4>
+              <ul>
+                <li>PC</li>
+                <li>Mobile (iOS/Android)</li>
+                <li>WebGL</li>
+              </ul>
+            </div>
+            <div className="skill-column">
+              <h4>Tools</h4>
+              <ul>
+                <li>Git</li>
+                <li>Blender</li>
+                <li>Photoshop</li>
+                <li>Visual Studio</li>
+              </ul>
+            </div>
+            <div className="skill-column">
+              <h4>Specialties</h4>
+              <ul>
+                <li>Gameplay Programming</li>
+                <li>System Design</li>
+                <li>Optimisation</li>
+                <li>Multiplayer</li>
+              </ul>
+            </div>
+          </div>
+          {/* Testimonials section */}
+          <h3>Testimonials</h3>
+          <div className="testimonials fade-in-up">
+            <div className="testimonial-card">
+              <p>
+                "Tiago's game development skills are outstanding! He delivered our
+                project on time and exceeded expectations."
+              </p>
+              <span>&mdash; Client A</span>
+            </div>
+            <div className="testimonial-card">
+              <p>
+                "His AI expertise brought life to our game with dynamic and adaptive
+                gameplay. Working with him was a pleasure."
+              </p>
+              <span>&mdash; Jane Doe</span>
+            </div>
+            <div className="testimonial-card">
+              <p>
+                "It's always a pleasure to collaborate with Tiago. His
+                professionalism and passion for games and AI are unmatched."
+              </p>
+              <span>&mdash; Project Manager</span>
+            </div>
+          </div>
+          {/* Resume download button */}
+          <div style={{ textAlign: 'center', marginTop: '2rem' }}>
+            <a href="resume.pdf" download className="btn">
+              Download Resume
+            </a>
+          </div>
+        </div>
+      );
+    }
+
+    // Contact page
+    function Contact() {
+      const [formData, setFormData] = useState({
+        name: '',
+        email: '',
+        subject: '',
+        message: '',
+      });
+      const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData((prev) => ({ ...prev, [name]: value }));
+      };
+      const handleSubmit = (e) => {
+        e.preventDefault();
+        // Send form submissions to the owner's email address. When the user
+        // clicks "Send Message" their mail client will open with these details.
+        const recipient = 'tiagorvmartins@gmail.com';
+        const mailtoLink = `mailto:${recipient}?subject=${encodeURIComponent(
+          formData.subject
+        )}&body=${encodeURIComponent(
+          `Name: ${formData.name}\nEmail: ${formData.email}\n\n${formData.message}`
+        )}`;
+        window.location.href = mailtoLink;
+      };
+      return (
+        <div className="section">
+          <h2>Contact Me</h2>
+          <p>Have a question or want to collaborate? Send me a message!</p>
+          <form className="contact-form" onSubmit={handleSubmit}>
+            <input
+              type="text"
+              name="name"
+              placeholder="Name"
+              value={formData.name}
+              onChange={handleChange}
+              required
+            />
+            <input
+              type="email"
+              name="email"
+              placeholder="Email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+            />
+            <input
+              type="text"
+              name="subject"
+              placeholder="Subject"
+              value={formData.subject}
+              onChange={handleChange}
+              required
+            />
+            <textarea
+              name="message"
+              placeholder="Message"
+              rows="5"
+              value={formData.message}
+              onChange={handleChange}
+              required
+            ></textarea>
+            <button type="submit">Send Message</button>
+          </form>
+        </div>
+      );
+    }
+
+    // Footer component with social links
+    function Footer() {
+      return (
+        <footer>
+          <div className="social-icons">
+            <a href="https://www.linkedin.com/in/tiago-martins-225424310/" target="_blank" rel="noopener" aria-label="LinkedIn">
+              LinkedIn
+            </a>
+            <a href="https://github.com/Kintuji" target="_blank" rel="noopener" aria-label="GitHub">
+              GitHub
+            </a>
+            <a href="https://kintuji.itch.io/" target="_blank" rel="noopener" aria-label="Itch.io">
+              Itch.io
+            </a>
+          </div>
+          <p>&copy; {new Date().getFullYear()} Game Dev &amp; AI Programmer. All rights reserved.</p>
+        </footer>
+      );
+    }
+
+    // Root App component
+    function App() {
+      const [page, setPage] = useState('home');
+      const projects = [
+        {
+          id: 'project1',
+          title: 'AI Puzzle Game',
+          description: 'A puzzle game powered by AI algorithms that adapts to player skill.',
+          link: 'projects/project1.html',
+        },
+        {
+          id: 'project2',
+          title: 'Procedural World Generator',
+          description: 'An AI-driven procedural world generator for exploration games.',
+          link: 'projects/project2.html',
+        },
+        {
+          id: 'project3',
+          title: 'Multiplayer Strategy Game',
+          description: 'A real-time multiplayer strategy game built with networking and AI.',
+          link: 'projects/project3.html',
+        },
+      ];
+      return (
+        <>
+          <Navigation page={page} onNavigate={setPage} />
+          {page === 'home' && <Home projects={projects} />}
+          {page === 'projects' && <Projects projects={projects} />}
+          {page === 'about' && <About />}
+          {page === 'contact' && <Contact />}
+          <Footer />
+        </>
+      );
+    }
+
+    // Render the React application into the root element
+    ReactDOM.render(<App />, document.getElementById('root'));
+  </script>
+</body>
+</html>
