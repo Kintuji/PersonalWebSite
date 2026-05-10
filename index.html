@@ -3,36 +3,132 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Game Dev &amp; AI Programmer Portfolio</title>
-  <!-- Google Fonts for clean, modern typography -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
-  <!-- Font Awesome for social icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-otkRWTfO+1tGAh2DP84uJKDE8o9tvCR69RqewKgk+pl3AXsE9oCSXoukujjTUvX0QFM+GAkVoiSWbjFazijjbg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <!-- Site stylesheet -->
+
+  <title>Tiago Martins | AI & Gameplay Programmer</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
 </head>
+
 <body>
   <div id="root"></div>
-  <!-- React and Babel from CDN -->
+
   <script src="https://unpkg.com/react@17/umd/react.production.min.js" crossorigin></script>
   <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js" crossorigin></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-  <!-- Main script written in JSX. Embed the code directly so Babel
-       processes it correctly in the browser. -->
-  <script type="text/babel" data-presets="react">
-    /*
-     * React application powering the portfolio site.
-     *
-     * This code defines a single‑page app with four main sections: Home,
-     * Projects, About and Contact. Navigation is handled via simple state
-     * changes rather than a full router. When the user clicks on a project
-     * card the corresponding HTML file in the ``projects/`` folder is opened
-     * in a new browser tab.
-     */
 
+  <script type="text/babel">
     const { useState } = React;
 
-    // Navigation component
+    const projects = [
+      {
+        id: 'table-for-two',
+        title: 'Table for Two',
+        image: 'images/table-for-two.png',
+        status: 'In Development',
+        role: 'Gameplay / Systems Programmer',
+        focus: 'Order systems, NPC customers, recipe timers, co-op logic, UI state',
+        tags: ['Unity', 'C#', 'Co-op', 'Systems'],
+        description:
+          'A chaotic cooking game focused on orders, customer flow, timers, scoring, and co-op gameplay.',
+        contributions: [
+          'Built delivery and order flow logic',
+          'Implemented recipe timers and score decay',
+          'Worked on NPC/customer behaviour',
+          'Handled UI and game state updates'
+        ],
+        link: 'projects/project2.html',
+      },
+      {
+        id: 'nexus-of-warriors',
+        title: 'Nexus of Warriors',
+        image: 'images/nexus-of-warriors.png',
+        status: 'School Project',
+        role: 'Gameplay / AI Programmer',
+        focus: 'FSM enemy logic, combat reactions, abilities, player attack events',
+        tags: ['Unity', 'C#', 'AI', 'Combat'],
+        description:
+          'A combat-focused project with abilities, enemy behaviour, and For Honor-inspired attack mechanics.',
+        contributions: [
+          'Built FSM-driven enemy behaviour',
+          'Implemented attack event responses',
+          'Worked on combat interaction logic',
+          'Programmed gameplay abilities'
+        ],
+        link: 'projects/project1.html',
+      },
+      {
+        id: 'nothin-sus-here',
+        title: "Nothin' SUS Here",
+        image: 'images/nothin-sus-here.png',
+        status: 'Game Jam',
+        role: 'Programmer',
+        focus: 'Prototype gameplay, player interaction, round logic, deception mechanics',
+        tags: ['Unity', 'Game Jam', 'Party Game'],
+        description:
+          'A co-op deception game where players disguise themselves as NPCs or animals and try to identify each other.',
+        contributions: [
+          'Implemented core gameplay systems',
+          'Worked on player interaction logic',
+          'Helped build round flow',
+          'Delivered a playable jam prototype'
+        ],
+        link: 'projects/project3.html',
+      },
+      {
+        id: 'jester',
+        title: 'Jester',
+        image: 'images/jester.png',
+        status: 'School Project',
+        role: 'Unreal Gameplay Programmer',
+        focus: 'Enemy AI, combat encounters, dungeon gameplay, Blueprint scripting',
+        tags: ['Unreal Engine', 'Blueprints', 'AI'],
+        description:
+          'An Unreal Engine project focused on dungeon gameplay, combat encounters, and AI behaviour.',
+        contributions: [
+          'Worked on enemy behaviour setup',
+          'Implemented combat logic',
+          'Used Blueprint scripting',
+          'Built gameplay encounter logic'
+        ],
+        link: 'projects/project4.html',
+      },
+      {
+        id: 'level-of-dimensions',
+        title: 'Level of Dimensions',
+        image: 'images/level-of-dimensions.png',
+        status: 'School Project',
+        role: 'Gameplay Programmer',
+        focus: 'Dimensional mechanics, player interaction, level progression',
+        tags: ['Unity', 'C#', 'Puzzle'],
+        description:
+          'A student prototype focused on dimensional gameplay mechanics, level logic, and player progression.',
+        contributions: [
+          'Programmed gameplay mechanics',
+          'Handled level scripting',
+          'Worked on player interaction logic'
+        ],
+        link: 'projects/project5.html',
+      },
+      {
+        id: 'time-deck',
+        title: 'Time Deck',
+        image: 'images/time-deck.png',
+        status: 'Prototype',
+        role: 'Gameplay Programmer',
+        focus: 'Card logic, time mechanics, gameplay rules, prototype systems',
+        tags: ['Unity', 'C#', 'Cards'],
+        description:
+          'A card-based prototype exploring time-related mechanics and strategic decision making.',
+        contributions: [
+          'Built card system logic',
+          'Worked on gameplay rules',
+          'Implemented prototype systems'
+        ],
+        link: 'projects/project6.html',
+      },
+    ];
+
     function Navigation({ page, onNavigate }) {
       const links = [
         { id: 'home', label: 'Home' },
@@ -40,24 +136,20 @@
         { id: 'about', label: 'About' },
         { id: 'contact', label: 'Contact' },
       ];
+
       return (
-        <nav>
+        <nav className="navbar">
           <div className="logo">Tiago Martins</div>
-          <ul>
+
+          <ul className="nav-links">
             {links.map((link) => (
               <li key={link.id}>
                 <a
                   href="#"
+                  className={page === link.id ? 'active' : ''}
                   onClick={(e) => {
                     e.preventDefault();
                     onNavigate(link.id);
-                  }}
-                  /* Always use white text for navigation for maximum contrast; highlight the active link with an underline */
-                  style={{
-                    color: '#ffffff',
-                    fontWeight: page === link.id ? 600 : 500,
-                    borderBottom: page === link.id ? '2px solid var(--primary-color)' : 'none',
-                    paddingBottom: '2px',
                   }}
                 >
                   {link.label}
@@ -69,282 +161,395 @@
       );
     }
 
-    // Home page
-    function Home({ projects }) {
+    function Home({ onNavigate }) {
       return (
-        <div className="home-page">
-        <div className="hero fade-in-up">
-            <h1>Creating Worlds with Code &amp; Intelligence</h1>
-        <p>
-              I combine game development and AI engineering to craft unique,
-              immersive experiences across PC, mobile and the web. From polished
-              gameplay mechanics to smart, adaptive systems, my work bridges
-              creativity with cutting‑edge technology.
-            </p>
-          </div>
-          <section className="section fade-in-up">
-            <h2>What I Do</h2>
-            <p>
-              I specialise in designing and developing video games, leveraging AI to
-              build dynamic behaviours, procedural content and adaptive gameplay.
-              Whether it's a mobile puzzle or a large‑scale multiplayer title, I
-              deliver polished experiences across platforms.
-            </p>
-            {/* Feature highlights for game development and AI engineering */}
-            <Features />
+        <>
+          <section className="hero">
+            <div className="hero-content">
+              <p className="eyebrow">AI & Gameplay Programmer</p>
+
+              <h1>Building game systems with behaviour, intelligence and purpose.</h1>
+
+              <p className="hero-text">
+                I focus on gameplay programming, AI behaviours, combat logic, NPC systems,
+                and scalable mechanics for Unity and Unreal Engine projects.
+              </p>
+
+              <div className="hero-buttons">
+                <button className="primary-btn" onClick={() => onNavigate('projects')}>
+                  View Projects
+                </button>
+
+                <button className="secondary-btn" onClick={() => onNavigate('contact')}>
+                  Contact Me
+                </button>
+              </div>
+            </div>
           </section>
-          <section className="section fade-in-up">
-            <h2>Latest Projects</h2>
+
+          <section className="section">
+            <div className="section-header">
+              <p className="eyebrow">Focus</p>
+              <h2>What I Do</h2>
+            </div>
+
+            <div className="features-grid">
+              <div className="feature-card">
+                <h3>Gameplay Programming</h3>
+                <p>
+                  Player mechanics, interaction systems, combat, UI logic, game flow,
+                  and core gameplay loops.
+                </p>
+              </div>
+
+              <div className="feature-card">
+                <h3>Game AI</h3>
+                <p>
+                  FSMs, behaviour logic, NPC decision making, enemy states,
+                  perception-style systems, and AI-driven gameplay.
+                </p>
+              </div>
+
+              <div className="feature-card">
+                <h3>Systems Design</h3>
+                <p>
+                  Scalable order systems, timers, progression logic, reusable managers,
+                  and clean gameplay architecture.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <section className="section">
+            <div className="section-header">
+              <p className="eyebrow">Current Focus</p>
+              <h2>Currently Building</h2>
+              <p className="section-subtitle">
+                Projects and systems I am actively improving as I build my portfolio toward AI and gameplay programming.
+              </p>
+            </div>
+
+            <div className="current-grid">
+              <div className="current-card">
+                <span className="current-label">Unity / C#</span>
+                <h3>Table for Two</h3>
+                <p>
+                  Improving NPC/customer behaviour, order flow, recipe timers, co-op logic,
+                  UI feedback, and scene loading systems.
+                </p>
+              </div>
+
+              <div className="current-card">
+                <span className="current-label">Unreal Engine</span>
+                <h3>AI Prototype</h3>
+                <p>
+                  Building enemy behaviour using behaviour trees, blackboards, combat states,
+                  and clearer AI decision logic.
+                </p>
+              </div>
+
+              <div className="current-card">
+                <span className="current-label">Internship / Unity</span>
+                <h3>Aden Interactive</h3>
+                <p>
+                  Working as a Unity developer intern, improving my production workflow,
+                  gameplay implementation skills, debugging discipline, and ability to deliver
+                  tasks in a real studio environment.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <section className="section">
+            <div className="section-header">
+              <p className="eyebrow">Selected Work</p>
+              <h2>Latest Projects</h2>
+              <p className="section-subtitle">
+                A focused selection of projects that show gameplay systems, AI behaviour, and implementation work.
+              </p>
+            </div>
+
             <div className="project-grid">
               {projects.slice(0, 3).map((project) => (
-                <div
-                  key={project.id}
-                  className="project-card"
-                  onClick={() => window.open(project.link, '_blank')}
-                >
-                  <div className="project-image-wrapper">
-                    <img
-                      src={project.image}
-                      alt={`${project.title} screenshot`}
-                      className="project-image"
-                    />
-                  </div>
-
-                  <div className="project-content">
-                    <div className="project-tags">
-                      {project.tags.map((tag) => (
-                        <span key={tag}>{tag}</span>
-                      ))}
-                    </div>
-
-                    <h3>{project.title}</h3>
-                    <p>{project.description}</p>
-                    <span className="btn">View Details</span>
-                  </div>
-                </div>
+                <ProjectCard key={project.id} project={project} />
               ))}
             </div>
           </section>
-        </div>
+        </>
       );
     }
 
-    // Feature list component for Home page
-    function Features() {
+    function ProjectCard({ project }) {
+      const tags = project.tags || [];
+      const contributions = project.contributions || [];
+
       return (
-        <div className="features fade-in-up">
-          <div className="feature">
-            <i className="fas fa-gamepad"></i>
-            <h3>Game Development</h3>
-            <p>
-              Crafting engaging gameplay loops, intuitive controls and polished
-              mechanics for immersive experiences.
-            </p>
+        <article
+          className="project-card"
+          onClick={() => window.open(project.link, '_blank')}
+        >
+          <div className="project-image">
+            <img
+              src={project.image || 'images/placeholder.png'}
+              alt={`${project.title} screenshot`}
+            />
+            <div className="project-gradient"></div>
           </div>
-          <div className="feature">
-            <i className="fas fa-brain"></i>
-            <h3>AI Engineering</h3>
-            <p>
-              Building adaptive behaviours, reinforcement learning agents and smart
-              systems that react to player actions.
-            </p>
-          </div>
-          <div className="feature">
-            <i className="fas fa-cubes"></i>
-            <h3>Procedural Generation</h3>
-            <p>
-              Designing algorithms to generate dynamic worlds, levels and content
-              ensuring replayability and variety.
-            </p>
-          </div>
-        </div>
-      );
-    }
 
-    function Projects({ projects }) {
-  return (
-    <div className="section">
-      <h2>Projects</h2>
-      <p className="subtitle">Selected work from 2024 - 2026</p>
-
-      <div className="project-grid">
-        {projects.map((project) => (
-          <div
-            key={project.id}
-            className="project-card"
-            onClick={() => window.open(project.link, '_blank')}
-          >
-            <div className="project-image-wrapper">
-              <img
-                src={project.image}
-                alt={`${project.title} screenshot`}
-                className="project-image"
-              />
+          <div className="project-content">
+            <div className="project-topline">
+              <span className="project-status">{project.status || 'Project'}</span>
+              <span className="project-role">{project.role || 'Game Developer'}</span>
             </div>
 
-            <div className="project-content">
-              <div className="project-tags">
-                {project.tags.map((tag) => (
-                  <span key={tag}>{tag}</span>
-                ))}
+            <div className="project-tags">
+              {tags.map((tag) => (
+                <span key={tag}>{tag}</span>
+              ))}
+            </div>
+
+            <h3>{project.title}</h3>
+            <p>{project.description}</p>
+
+            {project.focus && (
+              <div className="project-focus">
+                <strong>Technical focus:</strong>
+                <span>{project.focus}</span>
               </div>
+            )}
 
-              <h3>{project.title}</h3>
-              <p>{project.description}</p>
-
-              <h4>My contributions</h4>
+            {contributions.length > 0 && (
               <ul>
-                {project.contribution.map((item) => (
+                {contributions.slice(0, 4).map((item) => (
                   <li key={item}>{item}</li>
                 ))}
               </ul>
+            )}
 
-              <span className="btn">View Details</span>
+            <div className="project-actions">
+              <button className="project-main-btn">
+                View Project
+              </button>
             </div>
           </div>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-    // About page
-    function About() {
-      return (
-        <div className="section">
-          {/* Page heading and tagline */}
-          <h2>About Me</h2>
-          <p className="subtitle">
-            Passionate game developer and AI engineer with a mission to create memorable
-            experiences.
-          </p>
-          {/* Two‑column layout: journey text and key stats */}
-          <div className="about-two-column">
-            {/* Journey / biography card */}
-            <div className="journey-card fade-in-up">
-              <h3>My Journey</h3>
-              <p>
-                I'm a game developer and AI engineer with over five years of experience
-                creating engaging games for PC, mobile and the web. My journey began
-                with a love for both playing and building games, leading me to pursue
-                a professional career in interactive entertainment. Over the years I've
-                worked on projects ranging from mobile puzzles to complex real‑time
-                strategy titles. I specialise in gameplay programming, system design
-                and optimisation, always striving to deliver smooth and enjoyable
-                player experiences. Combining technical expertise with creative
-                problem‑solving, I believe that great games are built on solid systems
-                and polished mechanics. I'm committed to continuous learning and
-                staying current with industry trends.
-              </p>
-            </div>
-            {/* Stats card highlighting years, games shipped and downloads */}
-            <div className="stats-card fade-in-up">
-              <div className="stat">
-                <i className="fas fa-briefcase"></i>
-                <div>
-                  <span>5+ Years</span>
-                  <small>Game Development Experience</small>
-                </div>
-              </div>
-              <div className="stat">
-                <i className="fas fa-gamepad"></i>
-                <div>
-                  <span>10+ Games</span>
-                  <small>Published &amp; Shipped</small>
-                </div>
-              </div>
-              <div className="stat">
-                <i className="fas fa-download"></i>
-                <div>
-                  <span>2M+ Downloads</span>
-                  <small>Across All Projects</small>
-                </div>
-              </div>
-            </div>
-          </div>
-          {/* Technical skills grid */}
-          <h3>Technical Skills</h3>
-          <div className="skills-grid">
-            <div className="skill-column">
-              <h4>Game Engines</h4>
-              <ul>
-                <li>Unity</li>
-                <li>Unreal Engine</li>
-              </ul>
-            </div>
-            <div className="skill-column">
-              <h4>Programming</h4>
-              <ul>
-                <li>C#</li>
-                <li>C++</li>
-                <li>C</li>
-                <li>Java</li>
-              </ul>
-            </div>
-            <div className="skill-column">
-              <h4>Platforms</h4>
-              <ul>
-                <li>PC</li>
-                <li>Mobile (iOS/Android)</li>
-                <li>WebGL</li>
-              </ul>
-            </div>
-            <div className="skill-column">
-              <h4>Tools</h4>
-              <ul>
-                <li>Git</li>
-                <li>Blender</li>
-                <li>Photoshop</li>
-                <li>Visual Studio</li>
-                <li>Premier Pro</li>
-              </ul>
-            </div>
-            <div className="skill-column">
-              <h4>Specialties</h4>
-              <ul>
-                <li>Gameplay Programming</li>
-                <li>System Design</li>
-                <li>Optimisation</li>
-                <li>Multiplayer</li>
-              </ul>
-            </div>
-          </div>
-          {/* Testimonials section */}
-          <h3>Testimonials</h3>
-          <div className="testimonials fade-in-up">
-            <div className="testimonial-card">
-              <p>
-                "Tiago's game development skills are outstanding! He delivered our
-                project on time and exceeded expectations."
-              </p>
-              <span>&mdash; Client A</span>
-            </div>
-            <div className="testimonial-card">
-              <p>
-                "His AI expertise brought life to our game with dynamic and adaptive
-                gameplay. Working with him was a pleasure."
-              </p>
-              <span>&mdash; Jane Doe</span>
-            </div>
-            <div className="testimonial-card">
-              <p>
-                "It's always a pleasure to collaborate with Tiago. His
-                professionalism and passion for games and AI are unmatched."
-              </p>
-              <span>&mdash; Project Manager</span>
-            </div>
-          </div>
-          {/* Resume download button */}
-          <div style={{ textAlign: 'center', marginTop: '2rem' }}>
-            <a href="TiagoMartinsCV.pdf" download className="btn">
-              Download CV
-            </a>
-          </div>
-        </div>
+        </article>
       );
     }
 
-    // Contact page
+    function Projects() {
+      return (
+        <section className="section page-section">
+          <div className="section-header">
+            <p className="eyebrow">Portfolio</p>
+            <h2>Projects</h2>
+            <p className="section-subtitle">
+              Gameplay, AI systems, prototypes, school projects and game jam work.
+            </p>
+          </div>
+
+          <div className="project-grid">
+            {projects.map((project) => (
+              <ProjectCard key={project.id} project={project} />
+            ))}
+          </div>
+        </section>
+      );
+    }
+
+    function About() {
+      return (
+        <section className="about-page">
+          <div className="about-hero">
+            <div className="about-intro">
+              <p className="eyebrow">About Me</p>
+              <h2>Gameplay programmer building smarter game systems.</h2>
+              <p>
+                I am a game development student focused on AI, gameplay programming,
+                and system-driven design. My main goal is to build characters,
+                enemies, and gameplay systems that react clearly, feel intentional,
+                and make games more engaging.
+              </p>
+
+              <div className="about-actions">
+                <button
+                  className="primary-btn"
+                  onClick={() => window.location.href = 'mailto:tiagorvmartins@gmail.com'}
+                >
+                  Contact Me
+                </button>
+
+                <a
+                  className="secondary-link"
+                  href="https://github.com/Kintuji"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  View GitHub →
+                </a>
+              </div>
+            </div>
+
+            <div className="about-profile-card">
+              <div className="profile-orb"></div>
+
+              <div className="profile-content">
+                <p className="profile-label">Current Direction</p>
+                <h3>AI & Gameplay Programmer</h3>
+                <p>
+                  Unity • Unreal Engine • C# • C++ • AI Behaviour • Gameplay Systems
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="about-showcase">
+            <div className="about-panel large">
+              <span className="panel-number">01</span>
+              <h3>What I’m focused on</h3>
+              <p>
+                My focus is not just “making games.” That is too vague. I am building
+                towards a specific profile: gameplay-integrated AI. Enemy behaviour,
+                NPC decision logic, combat reactions, order systems, difficulty
+                directors, and reusable gameplay architecture.
+              </p>
+            </div>
+
+            <div className="about-panel">
+              <span className="panel-number">02</span>
+              <h3>How I think</h3>
+              <p>
+                I like systems that are readable, scalable, and easy to debug. A good
+                mechanic is not only something that works once. It should be clean
+                enough to expand, balance, and explain.
+              </p>
+            </div>
+
+            <div className="about-panel">
+              <span className="panel-number">03</span>
+              <h3>What I’m improving</h3>
+              <p>
+                I am actively improving my AI architecture, Unreal Engine workflow,
+                C++ fundamentals, portfolio presentation, and the discipline to finish
+                projects at a professional level.
+              </p>
+            </div>
+          </div>
+
+          <div className="skills-section">
+            <div className="section-header">
+              <p className="eyebrow">Technical Direction</p>
+              <h2>Skills & Tools</h2>
+            </div>
+
+            <div className="skill-category-grid">
+              <div className="skill-category">
+                <h3>Game Engines</h3>
+                <div className="skill-pills">
+                  <span>Unity</span>
+                  <span>Unreal Engine</span>
+                  <span>XR Toolkit</span>
+                </div>
+              </div>
+
+              <div className="skill-category">
+                <h3>Programming</h3>
+                <div className="skill-pills">
+                  <span>C#</span>
+                  <span>C++</span>
+                  <span>C</span>
+                  <span>Java</span>
+                  <span>JavaScript</span>
+                </div>
+              </div>
+
+              <div className="skill-category">
+                <h3>Game AI</h3>
+                <div className="skill-pills">
+                  <span>FSM</span>
+                  <span>Behaviour Trees</span>
+                  <span>Blackboards</span>
+                  <span>Utility AI</span>
+                  <span>NPC Logic</span>
+                </div>
+              </div>
+
+              <div className="skill-category">
+                <h3>Gameplay Systems</h3>
+                <div className="skill-pills">
+                  <span>Combat</span>
+                  <span>Orders</span>
+                  <span>Timers</span>
+                  <span>Co-op Input</span>
+                  <span>UI Logic</span>
+                </div>
+              </div>
+
+              <div className="skill-category">
+                <h3>Tools</h3>
+                <div className="skill-pills">
+                  <span>Git</span>
+                  <span>Blender</span>
+                  <span>Visual Studio</span>
+                  <span>VS Code</span>
+                  <span>Premiere Pro</span>
+                </div>
+              </div>
+
+              <div className="skill-category highlight">
+                <h3>Current Goal</h3>
+                <p>
+                  Build a portfolio that proves I can create behaviour-driven gameplay
+                  systems, not just small isolated prototypes.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="about-timeline">
+            <div className="section-header">
+              <p className="eyebrow">Journey</p>
+              <h2>Where I’m going</h2>
+            </div>
+
+            <div className="timeline">
+              <div className="timeline-item">
+                <span>Now</span>
+                <div>
+                  <h3>Building portfolio projects</h3>
+                  <p>
+                    Improving Table for Two, AI systems, Unreal prototypes, and the
+                    way each project is presented online.
+                  </p>
+                </div>
+              </div>
+
+              <div className="timeline-item">
+                <span>Next</span>
+                <div>
+                  <h3>Stronger AI architecture</h3>
+                  <p>
+                    Moving from basic FSMs into behaviour trees, blackboards, utility
+                    logic, and director-style systems.
+                  </p>
+                </div>
+              </div>
+
+              <div className="timeline-item">
+                <span>Goal</span>
+                <div>
+                  <h3>AI / Gameplay Programmer role</h3>
+                  <p>
+                    Positioning myself for internships and junior roles where I can
+                    work on gameplay systems, enemy behaviour, and interactive AI.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      );
+    }
+
     function Contact() {
       const [formData, setFormData] = useState({
         name: '',
@@ -352,26 +557,34 @@
         subject: '',
         message: '',
       });
-      const handleChange = (e) => {
+
+      function handleChange(e) {
         const { name, value } = e.target;
         setFormData((prev) => ({ ...prev, [name]: value }));
-      };
-      const handleSubmit = (e) => {
+      }
+
+      function handleSubmit(e) {
         e.preventDefault();
-        // Send form submissions to the owner's email address. When the user
-        // clicks "Send Message" their mail client will open with these details.
-        const recipient = 'tiagorvmartins06@gmail.com';
-        const mailtoLink = `mailto:${recipient}?subject=${encodeURIComponent(
-          formData.subject
-        )}&body=${encodeURIComponent(
+
+        const recipient = 'tiagorvmartins@gmail.com';
+        const subject = encodeURIComponent(formData.subject);
+        const body = encodeURIComponent(
           `Name: ${formData.name}\nEmail: ${formData.email}\n\n${formData.message}`
-        )}`;
-        window.location.href = mailtoLink;
-      };
+        );
+
+        window.location.href = `mailto:${recipient}?subject=${subject}&body=${body}`;
+      }
+
       return (
-        <div className="section">
-          <h2>Contact Me</h2>
-          <p>Have a question or want to collaborate? Send me a message!</p>
+        <section className="section page-section">
+          <div className="section-header">
+            <p className="eyebrow">Contact</p>
+            <h2>Contact Me</h2>
+            <p className="section-subtitle">
+              Want to collaborate, ask something, or see more of my work? Send me a message.
+            </p>
+          </div>
+
           <form className="contact-form" onSubmit={handleSubmit}>
             <input
               type="text"
@@ -381,6 +594,7 @@
               onChange={handleChange}
               required
             />
+
             <input
               type="email"
               name="email"
@@ -389,6 +603,7 @@
               onChange={handleChange}
               required
             />
+
             <input
               type="text"
               name="subject"
@@ -397,146 +612,59 @@
               onChange={handleChange}
               required
             />
+
             <textarea
               name="message"
               placeholder="Message"
-              rows="5"
+              rows="6"
               value={formData.message}
               onChange={handleChange}
               required
             ></textarea>
-            <button type="submit">Send Message</button>
+
+            <button type="submit" className="primary-btn">Send Message</button>
           </form>
-        </div>
+        </section>
       );
     }
 
-    // Footer component with social links
     function Footer() {
       return (
         <footer>
-          <div className="social-icons">
-            <a href="https://www.linkedin.com/in/tiagomartinsdev/" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <div className="footer-links">
+            <a href="https://www.linkedin.com/in/tiago-martins-225424310/" target="_blank" rel="noopener">
               LinkedIn
             </a>
-            <a href="https://github.com/Kintuji" target="_blank" rel="noopener" aria-label="GitHub">
+            <a href="https://github.com/Kintuji" target="_blank" rel="noopener">
               GitHub
             </a>
-            <a href="https://kintuji.itch.io/" target="_blank" rel="noopener" aria-label="Itch.io">
+            <a href="https://kintuji.itch.io/" target="_blank" rel="noopener">
               Itch.io
             </a>
           </div>
-          <p>&copy; {new Date().getFullYear()} Game Dev &amp; AI Programmer. All rights reserved.</p>
+
+          <p>© {new Date().getFullYear()} Tiago Martins. AI & Gameplay Programmer.</p>
         </footer>
       );
     }
 
-    // Root App component
     function App() {
       const [page, setPage] = useState('home');
-const projects = [
-  {
-    id: 'nexus-of-warriors',
-    title: 'Nexus of Warriors',
-    image: 'images/nexus-of-warriors.png',
-    tags: ['Unity', 'C#', 'AI', 'FSM'],
-    description:
-      'A combat prototype focused on For Honor-inspired attack mechanics, enemy reactions, and event-driven AI behaviour.',
-    contribution: [
-      'Finite State Machine enemy AI',
-      'Player attack event system',
-      'Combat behaviour logic',
-      'Gameplay programming'
-    ],
-    link: 'projects/project1.html',
-  },
-  {
-    id: 'table-for-two',
-    title: 'Table for Two',
-    image: 'images/table-for-two.png',
-    tags: ['Unity', 'C#', 'Co-op', 'AI'],
-    description:
-      'A chaotic cooking game with optional co-op, order management, NPC/customer systems, and scalable gameplay logic.',
-    contribution: [
-      'Order and recipe systems',
-      'Co-op player spawning',
-      'NPC/customer behaviour',
-      'Game state and UI logic'
-    ],
-    link: 'projects/project2.html',
-  },
-  {
-    id: 'nothin-sus-here',
-    title: "Nothin' SUS Here",
-    image: 'images/nothin-sus-here.png',
-    tags: ['Unity', 'Game Jam', 'Co-op', 'Party Game'],
-    description:
-      'A co-op party game where players disguise themselves as NPCs/animals and try to find each other across short competitive rounds.',
-    contribution: [
-      'Core gameplay systems',
-      'Player interaction logic',
-      'Round flow',
-      'Prototype implementation'
-    ],
-    link: 'projects/project3.html',
-  },
-  {
-    id: 'level-of-dimensions',
-    title: 'Level of Dimensions',
-    image: 'images/level-of-dimensions.png',
-    tags: ['Unity', 'C#', 'Puzzle'],
-    description:
-      'A student project focused on dimensional level mechanics and gameplay progression.',
-    contribution: [
-      'Gameplay programming',
-      'Level logic',
-      'Player mechanics'
-    ],
-    link: 'projects/project4.html',
-  },
-  {
-    id: 'time-deck',
-    title: 'Time Deck',
-    image: 'images/time-deck.png',
-    tags: ['Unity', 'C#', 'Cards'],
-    description:
-      'A card-based prototype exploring time-related mechanics and strategic decision making.',
-    contribution: [
-      'Card system logic',
-      'Gameplay rules',
-      'Prototype systems'
-    ],
-    link: 'projects/project5.html',
-  },
-  {
-    id: 'jester',
-    title: 'Jester',
-    image: 'images/jester.png',
-    tags: ['Unity', 'AI'],
-    description:
-      'A school Unreal Engine project focused on dungeon gameplay, AI behaviour, and combat encounters.',
-    contribution: [
-      'AI behaviour setup',
-      'Combat logic',
-      'Blueprint scripting',
-      'Gameplay implementation'
-    ],
-    link: 'projects/project6.html',
-  },
-];
+
       return (
         <>
           <Navigation page={page} onNavigate={setPage} />
-          {page === 'home' && <Home projects={projects} />}
-          {page === 'projects' && <Projects projects={projects} />}
+
+          {page === 'home' && <Home onNavigate={setPage} />}
+          {page === 'projects' && <Projects />}
           {page === 'about' && <About />}
           {page === 'contact' && <Contact />}
+
           <Footer />
         </>
       );
     }
 
-    // Render the React application into the root element
     ReactDOM.render(<App />, document.getElementById('root'));
   </script>
 </body>
