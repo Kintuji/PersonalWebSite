@@ -24,7 +24,7 @@
       {
         id: 'table-for-two',
         title: 'Table for Two',
-        image: 'images/table-for-two.png',
+        image: 'images/table-for-two.jpeg',
         status: 'In Development',
         role: 'Gameplay / Systems Programmer',
         focus: 'Order systems, NPC customers, recipe timers, co-op logic, UI state',
@@ -69,7 +69,7 @@
           'A co-op deception game where players disguise themselves as NPCs or animals and try to identify each other.',
         contributions: [
           'Implemented core gameplay systems',
-          'Worked on player interaction logic',
+          'Worked on player interaction logic', 
           'Helped build round flow',
           'Delivered a playable jam prototype'
         ],
@@ -79,17 +79,14 @@
         id: 'jester',
         title: 'Jester',
         image: 'images/jester.png',
-        status: 'School Project',
-        role: 'Unreal Gameplay Programmer',
-        focus: 'Enemy AI, combat encounters, dungeon gameplay, Blueprint scripting',
-        tags: ['Unreal Engine', 'Blueprints', 'AI'],
+        status: 'Game Jam',
+        role: 'AI programmer',
+        focus: 'Patrol with unpredictable behaviour with a jumpscare',
+        tags: ['Unity', 'Blueprints', 'AI'],
         description:
-          'An Unreal Engine project focused on dungeon gameplay, combat encounters, and AI behaviour.',
+          'Horror game with a clown named Jester who is unpredictable.',
         contributions: [
-          'Worked on enemy behaviour setup',
-          'Implemented combat logic',
-          'Used Blueprint scripting',
-          'Built gameplay encounter logic'
+          'Worked on a fully enemy behaviour',
         ],
         link: 'projects/project4.html',
       },
@@ -102,7 +99,7 @@
         focus: 'Dimensional mechanics, player interaction, level progression',
         tags: ['Unity', 'C#', 'Puzzle'],
         description:
-          'A student prototype focused on dimensional gameplay mechanics, level logic, and player progression.',
+          'A puzzle game where players switch between dimensions to solve puzzles and progress through levels.',
         contributions: [
           'Programmed gameplay mechanics',
           'Handled level scripting',
@@ -119,11 +116,10 @@
         focus: 'Card logic, time mechanics, gameplay rules, prototype systems',
         tags: ['Unity', 'C#', 'Cards'],
         description:
-          'A card-based prototype exploring time-related mechanics and strategic decision making.',
+          'A card-based prototype focused on time manipulation mechanics, card interactions, and gameplay rules.',
         contributions: [
-          'Built card system logic',
-          'Worked on gameplay rules',
-          'Implemented prototype systems'
+          'AI behaviour',
+          'Character animations',
         ],
         link: 'projects/project6.html',
       },
@@ -164,28 +160,40 @@
     function Home({ onNavigate }) {
       return (
         <>
-          <section className="hero">
-            <div className="hero-content">
-              <p className="eyebrow">AI & Gameplay Programmer</p>
+        
+<section className="hero">
+  <div className="hero-container">
 
-              <h1>Building game systems with behaviour, intelligence and purpose.</h1>
+    <div className="hero-content">
+      <p className="eyebrow">AI & Gameplay Programmer</p>
 
-              <p className="hero-text">
-                I focus on gameplay programming, AI behaviours, combat logic, NPC systems,
-                and scalable mechanics for Unity and Unreal Engine projects.
-              </p>
+      <h1>
+        Building game systems with behaviour, intelligence and purpose.
+      </h1>
 
-              <div className="hero-buttons">
-                <button className="primary-btn" onClick={() => onNavigate('projects')}>
-                  View Projects
-                </button>
+      <p className="hero-text">
+        I focus on gameplay programming, AI behaviours, combat logic, NPC systems,
+        and scalable mechanics for Unity and Unreal Engine projects.
+      </p>
 
-                <button className="secondary-btn" onClick={() => onNavigate('contact')}>
-                  Contact Me
-                </button>
-              </div>
-            </div>
-          </section>
+      <div className="hero-buttons">
+        <button className="primary-btn">
+          View Projects
+        </button>
+
+        <button className="secondary-btn">
+          Contact Me
+        </button>
+      </div>
+    </div>
+
+    <div className="hero-image">
+      <img src="images/profile.jpg" alt="Tiago Martins" />
+    </div>
+
+  </div>
+</section>
+
 
           <section className="section">
             <div className="section-header">

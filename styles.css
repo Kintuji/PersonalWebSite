@@ -866,3 +866,169 @@ footer {
     grid-template-columns: 1fr;
   }
 }
+
+/* PROJECT PAGE */
+
+.project-page {
+  padding: 4rem 5vw;
+  max-width: 1000px;
+  margin: auto;
+}
+
+.back-link {
+  display: inline-block;
+  margin-bottom: 2rem;
+  color: #aaa;
+  text-decoration: none;
+}
+
+.project-header h1 {
+  margin: 0;
+  font-size: 3rem;
+}
+
+.project-subtitle {
+  color: #aaa;
+  margin-top: 0.5rem;
+}
+
+.project-meta {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+}
+
+.project-meta span {
+  background: rgba(255,255,255,0.08);
+  padding: 0.4rem 0.7rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+}
+
+/* VIDEO */
+
+.project-video {
+  margin: 2rem 0;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.project-video iframe {
+  width: 100%;
+  height: 420px;
+}
+
+/* ACTIONS */
+
+.project-detail-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.project-detail-actions a {
+  text-decoration: none;
+  padding: 0.7rem 1rem;
+  border-radius: 999px;
+  background: #4f8cff;
+  color: white;
+  font-weight: bold;
+}
+
+/* SECTIONS */
+
+.project-section {
+  margin-top: 3rem;
+}
+
+.project-section h2 {
+  margin-bottom: 1rem;
+}
+
+.project-list {
+  padding-left: 1rem;
+}
+
+.project-list li {
+  margin-bottom: 0.5rem;
+}
+
+/* GALLERY */
+
+.project-gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.project-gallery img {
+  width: 100%;
+  border-radius: 12px;
+}
+
+/* LIGHTBOX */
+
+.lightbox {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.lightbox img {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 10px;
+}
+
+.lightbox.active {
+  display: flex;
+}
+
+.project-gallery img {
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.project-gallery img:hover {
+  transform: scale(1.03);
+}
+
+.hero-container {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  align-items: center;
+  gap: 3rem;
+}
+
+.hero-image {
+  display: flex;
+  justify-content: center;
+}
+
+.hero-image img {
+  width: 100%;
+  max-width: 340px;
+  border-radius: 24px;
+  border: 1px solid rgba(255,255,255,0.1);
+  box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+}
+
+@media (max-width: 900px) {
+  .hero-container {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .hero-image {
+    margin-top: 2rem;
+  }
+}
