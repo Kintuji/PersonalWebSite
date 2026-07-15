@@ -4,8 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-  <title>Table for Two | Project</title>
+  <title>Table for Two — Case Study | Tiago Martins</title>
 
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../styles.css">
 </head>
 
@@ -20,13 +21,30 @@
     <div class="project-header">
       <h1>Table for Two</h1>
       <p class="project-subtitle">
-        Co-op cooking game focused on order systems, customer flow, timers and gameplay coordination.
+        A co-op cooking game where the real design problem wasn't the cooking — it was keeping
+        order, timing, and scoring fair when two players are moving fast and stepping on each other.
       </p>
 
       <div class="project-meta">
         <span>Unity / C#</span>
         <span>Gameplay / Systems Programmer</span>
         <span>In Development</span>
+      </div>
+    </div>
+
+    <!-- ROLE & SCOPE -->
+    <div class="case-scope">
+      <div>
+        <span>Role</span>
+        <strong>Gameplay &amp; Systems Programmer</strong>
+      </div>
+      <div>
+        <span>Team</span>
+        <strong>Solo / small team project</strong>
+      </div>
+      <div>
+        <span>Focus</span>
+        <strong>Order flow, timers, NPC behaviour, co-op state</strong>
       </div>
     </div>
 
@@ -43,59 +61,141 @@
     <!-- ACTIONS -->
     <div class="project-detail-actions">
       <a href="https://carolina-sousa.itch.io/table-for-two" target="_blank">Play on Itch.io</a>
-
-      <a href="../assets/table-for-two/docs/gdd.pdf" target="_blank">
-        View GDD
-      </a>
-
-      <a href="../assets/table-for-two/docs/technical.pdf" target="_blank">
-        Technical Breakdown
-      </a>
+      <a href="../assets/table-for-two/docs/gdd.pdf" target="_blank">View GDD</a>
+      <a href="../assets/table-for-two/docs/technical.pdf" target="_blank">Technical Breakdown</a>
     </div>
 
-    <!-- DESCRIPTION -->
+    <!-- OVERVIEW -->
     <div class="project-section">
       <h2>Overview</h2>
       <p>
         Table for Two is a fast-paced co-op cooking game where players manage orders,
-        prepare recipes, and coordinate under time pressure. The focus is on system-driven
-        gameplay including delivery logic, timers, and customer flow.
+        prepare recipes, and coordinate under time pressure. Co-op cooking games live or die
+        on one thing: does the chaos feel <em>fair</em>? If the order and timing systems don't
+        hold together, the game either feels broken — orders lost, timers desyncing — or feels
+        boring because it's too forgiving to create real pressure.
       </p>
     </div>
 
-    <!-- YOUR WORK -->
-    <div class="project-section">
-      <h2>My Contributions</h2>
+    <div class="project-layout">
+      <div class="project-main">
 
-      <ul class="project-list">
-        <li>Built order and delivery system</li>
-        <li>Implemented recipe timers and score decay</li>
-        <li>Developed NPC/customer behaviour</li>
-        <li>Handled UI updates and game state flow</li>
-      </ul>
-    </div>
+        <!-- THE PROBLEM -->
+        <div class="case-block problem">
+          <span class="case-block-label">The Problem</span>
+          <h2>Keeping order state fair under co-op chaos</h2>
+          <p>
+            Two players are moving fast, orders are stacking up, and either player can pick up,
+            drop, or hand off an order mid-prep. The core challenge wasn't the cooking mechanics
+            themselves — it was building an order and delivery system that could scale with
+            unpredictable player behaviour without losing state or feeling unfair to whoever ended
+            up holding an order when the timer ran out.
+          </p>
+          <p>
+            The trickiest edge case: if a recipe timer and a customer's patience timer both affect
+            score independently, it's easy to double-penalise the player, or to score an order as
+            "late" when it was actually handed off cleanly between the two of them.
+          </p>
+        </div>
 
-    <!-- TECH FOCUS -->
-    <div class="project-section">
-      <h2>Technical Focus</h2>
-      <p>
-        Order manager architecture, timed gameplay loops, NPC state handling,
-        UI synchronization, and scalable gameplay systems.
-      </p>
-    </div>
+        <!-- MY APPROACH -->
+        <div class="case-block approach">
+          <span class="case-block-label">My Approach</span>
+          <h2>Order state as its own system, not attached to a player</h2>
+          <p>
+            I built the order/delivery pipeline as its own system rather than bolting order logic
+            onto individual recipe objects. Each order carries its own timer, decay curve, and
+            delivery state independent of which player is handling it — so a player can drop an
+            order mid-prep, the other player can pick it up, and the timer and score decay keep
+            tracking correctly without either player needing to "own" the order in code.
+          </p>
+          <p>
+            For customer behaviour, I drove both the visual state (waiting → served → leaving) and
+            the scoring off a single customer state machine with a decaying patience value, instead
+            of maintaining separate systems for "how the customer looks" and "how the customer
+            scores." That single source of truth is what resolved the double-penalty problem above:
+            one decay curve owns the lateness signal, and the delivery and customer systems both
+            read from it rather than keeping their own clocks.
+          </p>
+        </div>
 
-    <!-- SCREENSHOTS -->
-    <div class="project-section">
-      <h2>Screenshots</h2>
+        <!-- RESULT -->
+        <div class="case-block result">
+          <span class="case-block-label">Result</span>
+          <h2>A system that holds up under co-op pressure</h2>
+          <p>
+            The order/delivery and customer systems hold up under the kind of fast, uncoordinated
+            play a real co-op session produces, and new recipe types can be added without touching
+            the underlying timer or scoring logic. Playable build available on itch.io, with a full
+            gameplay trailer above.
+          </p>
+        </div>
 
-      <div class="project-gallery">
-        <img src="../assets/table-for-two/screenshots/shot1.png">
-        <img src="../assets/table-for-two/screenshots/shot2.png">
-        <img src="../assets/table-for-two/screenshots/shot3.png">
+        <!-- WHAT'S NEXT -->
+        <div class="case-next">
+          <h3>What I'd improve next</h3>
+          <p>
+            The UI / game-state sync layer currently does more manual bookkeeping than I'd like —
+            it works, but it's the part most likely to break as more recipe types get added. Next
+            step is moving that to a proper event-driven update instead of polling state every frame.
+          </p>
+        </div>
+
+        <!-- YOUR WORK -->
+        <div class="project-section">
+          <h2>My Contributions</h2>
+          <ul class="project-list">
+            <li>Built the order and delivery system as a standalone state, independent of player ownership</li>
+            <li>Implemented recipe timers and score decay driven by a single lateness curve</li>
+            <li>Developed the NPC/customer state machine (waiting → served → leaving) driving both visuals and scoring</li>
+            <li>Handled UI updates and game state flow</li>
+          </ul>
+        </div>
+
+        <!-- TECH FOCUS -->
+        <div class="project-section">
+          <h2>Technical Focus</h2>
+          <p>
+            Order manager architecture, timed gameplay loops, NPC state handling,
+            UI synchronization, and scalable gameplay systems.
+          </p>
+        </div>
+
       </div>
+
+      <!-- SCREENSHOTS -->
+      <aside class="project-sidebar">
+        <p class="sidebar-label">Screenshots</p>
+        <div class="project-gallery">
+          <img src="../assets/table-for-two/screenshots/shot1.png" alt="Table for Two screenshot 1">
+          <img src="../assets/table-for-two/screenshots/shot2.png" alt="Table for Two screenshot 2">
+          <img src="../assets/table-for-two/screenshots/shot3.png" alt="Table for Two screenshot 3">
+        </div>
+      </aside>
     </div>
 
   </section>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox">
+    <img id="lightbox-img" src="" alt="">
+  </div>
+  <script>
+    document.querySelectorAll('.project-gallery img').forEach((img) => {
+      img.addEventListener('click', () => {
+        document.getElementById('lightbox-img').src = img.src;
+        document.getElementById('lightbox').classList.add('active');
+      });
+    });
+    document.getElementById('lightbox').addEventListener('click', () => {
+      document.getElementById('lightbox').classList.remove('active');
+    });
+  </script>
+
+  <!-- NOTE FOR TIAGO: the Problem / Approach / Result text above is written from your
+       contributions list + our chat. Swap in your real specifics (the actual data structure,
+       the actual bug you hit, the actual fix) before this goes live — an interviewer will ask
+       you to explain it, so it needs to be true, not just plausible. -->
 
 </body>
 </html>

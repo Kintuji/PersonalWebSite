@@ -29,8 +29,11 @@
         role: 'Gameplay / Systems Programmer',
         focus: 'Order systems, NPC customers, recipe timers, co-op logic, UI state',
         tags: ['Unity', 'C#', 'Co-op', 'Systems'],
+        featured: true,
         description:
           'A chaotic cooking game focused on orders, customer flow, timers, scoring, and co-op gameplay.',
+        challenge:
+          'Two players moving fast, orders stacking up — the order/delivery system had to hold together under co-op chaos without desyncing state or feeling unfair.',
         contributions: [
           'Built delivery and order flow logic',
           'Implemented recipe timers and score decay',
@@ -47,8 +50,11 @@
         role: 'Gameplay / AI Programmer',
         focus: 'FSM enemy logic, combat reactions, abilities, player attack events',
         tags: ['Unity', 'C#', 'AI', 'Combat'],
+        featured: true,
         description:
           'A combat-focused project with abilities, enemy behaviour, and For Honor-inspired attack mechanics.',
+        challenge:
+          'Enemies needed to react to directional attacks and combos convincingly, without hand-scripting a response for every attack/ability combination.',
         contributions: [
           'Built FSM-driven enemy behaviour',
           'Implemented attack event responses',
@@ -79,14 +85,17 @@
         id: 'jester',
         title: 'Jester',
         image: 'images/jester.png',
-        status: 'Game Jam',
-        role: 'AI programmer',
-        focus: 'Patrol with unpredictable behaviour with a jumpscare',
-        tags: ['Unity', 'Blueprints', 'AI'],
+        status: 'Released',
+        role: 'AI Programmer',
+        focus: 'FSM-driven enemy AI with vision-based detection and randomised behaviour',
+        tags: ['Unity', 'C#', 'AI', 'Horror'],
         description:
-          'Horror game with a clown named Jester who is unpredictable.',
+          'A horror maze game where a clown named Jester patrols between checkpoints and reacts unpredictably — fleeing, sneaking, or attacking — the moment he sees you.',
         contributions: [
-          'Worked on a fully enemy behaviour',
+          'Built the Jester enemy AI: checkpoint-based patrol and vision-based player detection',
+          'Designed an FSM with randomised behaviour states — flee, sneak, and attack',
+          'Implemented the jumpscare triggered when the player is caught',
+          'Integrated all of Jester\'s animations and sound',
         ],
         link: 'projects/project4.html',
       },
@@ -122,6 +131,23 @@
           'Character animations',
         ],
         link: 'projects/project6.html',
+      },
+      {
+        id: 'pedra-a-pedra',
+        title: 'Pedra a Pedra — Museu Virtual da Calçada',
+        image: 'images/pedra-a-pedra.jpg',
+        status: 'Released',
+        role: 'Game Developer (VR) / Mechanics Engineer',
+        focus: 'VR interaction mechanics, locomotion, integrating 3D/audiovisual content in Unity',
+        tags: ['Unity', 'VR', 'Windows', '3D'],
+        description:
+          'A VR virtual museum dedicated to Portuguese calçada (traditional stone pavement) in the Algarve, exploring its history, craftsmanship, and cultural value through interactive 3D and audiovisual content.',
+        contributions: [
+          'Built VR interaction and movement mechanics',
+          'Integrated 3D, audio, and video content into Unity',
+          'Worked with a multidisciplinary team on a released VR experience',
+        ],
+        link: 'projects/project7.html',
       },
     ];
 
@@ -194,6 +220,25 @@
   </div>
 </section>
 
+          <section className="section showreel-section">
+            <div className="section-header">
+              <p className="eyebrow">Watch</p>
+              <h2>Showreel</h2>
+              <p className="section-subtitle">
+                A quick look across projects — gameplay systems, AI behaviour, and combat mechanics in motion.
+              </p>
+            </div>
+
+            <div className="showreel-video">
+              <iframe
+                src="https://www.youtube.com/embed/KkfhIXVj418"
+                title="Tiago Martins — Showreel"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen>
+              </iframe>
+            </div>
+          </section>
 
           <section className="section">
             <div className="section-header">
@@ -271,14 +316,15 @@
           <section className="section">
             <div className="section-header">
               <p className="eyebrow">Selected Work</p>
-              <h2>Latest Projects</h2>
+              <h2>Featured Case Studies</h2>
               <p className="section-subtitle">
-                A focused selection of projects that show gameplay systems, AI behaviour, and implementation work.
+                Two projects I can go deep on: the technical problem, the decision I made, and why. The rest of my
+                work is on the Projects page.
               </p>
             </div>
 
             <div className="project-grid">
-              {projects.slice(0, 3).map((project) => (
+              {projects.filter((p) => p.featured).map((project) => (
                 <ProjectCard key={project.id} project={project} />
               ))}
             </div>
@@ -293,7 +339,7 @@
 
       return (
         <article
-          className="project-card"
+          className={`project-card${project.featured ? ' featured' : ''}`}
           onClick={() => window.open(project.link, '_blank')}
         >
           <div className="project-image">
@@ -306,6 +352,7 @@
 
           <div className="project-content">
             <div className="project-topline">
+              {project.featured && <span className="project-case-study-badge">Case Study</span>}
               <span className="project-status">{project.status || 'Project'}</span>
               <span className="project-role">{project.role || 'Game Developer'}</span>
             </div>
@@ -319,9 +366,14 @@
             <h3>{project.title}</h3>
             <p>{project.description}</p>
 
-            {project.focus && (
+            {project.challenge ? (
               <div className="project-focus">
-                <strong>Technical focus:</strong>
+                <strong>The problem</strong>
+                <span>{project.challenge}</span>
+              </div>
+            ) : project.focus && (
+              <div className="project-focus">
+                <strong>Technical focus</strong>
                 <span>{project.focus}</span>
               </div>
             )}
@@ -336,7 +388,7 @@
 
             <div className="project-actions">
               <button className="project-main-btn">
-                View Project
+                {project.featured ? 'Read Case Study' : 'View Project'}
               </button>
             </div>
           </div>
@@ -345,22 +397,60 @@
     }
 
     function Projects() {
+      const featured = projects.filter((p) => p.featured);
+      const others = projects.filter((p) => !p.featured);
+
       return (
         <section className="section page-section">
           <div className="section-header">
             <p className="eyebrow">Portfolio</p>
             <h2>Projects</h2>
             <p className="section-subtitle">
-              Gameplay, AI systems, prototypes, school projects and game jam work.
+              Two projects below go deep as full case studies — the technical problem, the decision I made, and
+              why. Everything else is lighter: smaller prototypes and jam entries worth a quick look, not a full
+              write-up.
             </p>
           </div>
 
           <div className="project-grid">
-            {projects.map((project) => (
+            {featured.map((project) => (
               <ProjectCard key={project.id} project={project} />
             ))}
           </div>
+
+          <div className="other-projects-header">
+            <p className="eyebrow">Also Built</p>
+            <h3>Other Projects</h3>
+          </div>
+
+          <div className="other-project-grid">
+            {others.map((project) => (
+              <OtherProjectCard key={project.id} project={project} />
+            ))}
+          </div>
         </section>
+      );
+    }
+
+    function OtherProjectCard({ project }) {
+      return (
+        <article
+          className="other-project-card"
+          onClick={() => window.open(project.link, '_blank')}
+        >
+          <div className="other-project-topline">
+            <span className="project-status">{project.status || 'Project'}</span>
+            <span className="project-role">{project.role || 'Game Developer'}</span>
+          </div>
+          <h3>{project.title}</h3>
+          <p>{project.description}</p>
+          <div className="project-tags">
+            {(project.tags || []).map((tag) => (
+              <span key={tag}>{tag}</span>
+            ))}
+          </div>
+          <span className="other-project-link">View project →</span>
+        </article>
       );
     }
 
@@ -372,10 +462,8 @@
               <p className="eyebrow">About Me</p>
               <h2>Gameplay programmer building smarter game systems.</h2>
               <p>
-                I am a game development student focused on AI, gameplay programming,
-                and system-driven design. My main goal is to build characters,
-                enemies, and gameplay systems that react clearly, feel intentional,
-                and make games more engaging.
+                I am a gameplay programmer focused on AI, gameplay systems, and system-driven design.
+                My goal is to build robust, scalable, and well-structured architectures that support maintainable, extensible, and production-ready game systems.
               </p>
 
               <div className="about-actions">
@@ -547,8 +635,8 @@
                 <div>
                   <h3>AI / Gameplay Programmer role</h3>
                   <p>
-                    Positioning myself for internships and junior roles where I can
-                    work on gameplay systems, enemy behaviour, and interactive AI.
+                    Positioning myself for roles where I can
+                    work and progress on my carrer as a programmer specializing in gameplay systems, enemy behaviour, and interactive AI.
                   </p>
                 </div>
               </div>

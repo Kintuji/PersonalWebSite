@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <title>Nexus of Warriors — Case Study | Tiago Martins</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../styles.css">
+</head>
+
+<body>
+
+  <section class="project-page">
+
+    <!-- BACK -->
+    <a href="../index.html" class="back-link">← Back to Portfolio</a>
+
+    <!-- HEADER -->
+    <div class="project-header">
+      <h1>Nexus of Warriors</h1>
+      <p class="project-subtitle">
+        A For Honor-inspired combat project where enemies need to react convincingly to directional
+        attacks and abilities — without hand-scripting a response for every attack/ability combination.
+      </p>
+
+      <div class="project-meta">
+        <span>Unity / C#</span>
+        <span>Gameplay / AI Programmer</span>
+        <span>School Project</span>
+      </div>
+    </div>
+
+    <!-- ROLE & SCOPE -->
+    <div class="case-scope">
+      <div>
+        <span>Role</span>
+        <strong>Gameplay &amp; AI Programmer</strong>
+      </div>
+      <div>
+        <span>Team</span>
+        <strong>School project team</strong>
+      </div>
+      <div>
+        <span>Focus</span>
+        <strong>FSM enemy AI, combat reactions, abilities</strong>
+      </div>
+    </div>
+
+    <!-- VIDEO -->
+    <div class="showreel-video">
+      <iframe
+        src="https://www.youtube.com/embed/NfzFxDVlCck"
+        title="Nexus of Warriors Trailer"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>
+    </div>
+
+    <!-- ACTIONS -->
+    <div class="project-detail-actions">
+      <a href="https://youtu.be/NfzFxDVlCck" target="_blank">Watch Trailer</a>
+      <a href="../assets/nexus-of-warriors/docs/technical.pdf" target="_blank">Technical Breakdown</a>
+    </div>
+
+    <!-- OVERVIEW -->
+    <div class="project-section">
+      <h2>Overview</h2>
+      <p>
+        Nexus of Warriors is a combat-focused project built around For Honor-style directional
+        attacks, abilities, and enemy reactions. The goal was combat that feels readable and
+        responsive on both sides — the player needs to see and react to enemy attacks, and the
+        enemy needs to react to the player's in a way that doesn't feel scripted or exploitable.
+      </p>
+    </div>
+
+    <div class="project-layout">
+      <div class="project-main">
+
+        <!-- THE PROBLEM -->
+        <div class="case-block problem">
+          <span class="case-block-label">The Problem</span>
+          <h2>Enemy reactions that scale with attacks and abilities, not against them</h2>
+          <p>
+            With multiple attack directions and multiple abilities, the naive approach — a hand-written
+            reaction for every attack × ability combination — doesn't scale. Every new ability added
+            would mean touching every enemy reaction state, which gets unmanageable fast and is exactly
+            the kind of coupling that makes combat systems fragile to extend.
+          </p>
+          <p>
+            The system also had to stay readable for the player: an enemy playing an animation that
+            doesn't match what it's actually about to do breaks trust in the combat, so the FSM states
+            driving behaviour had to line up with the states driving animation and hit windows.
+          </p>
+        </div>
+
+        <!-- MY APPROACH -->
+        <div class="case-block approach">
+          <span class="case-block-label">My Approach</span>
+          <h2>Attack events the enemy FSM reacts to, not per-ability logic</h2>
+          <p>
+            I built enemy behaviour as a finite state machine driven by attack <em>events</em> rather
+            than attack <em>types</em> — when the player triggers an attack, it broadcasts an event with
+            direction and timing data, and the enemy FSM decides how to respond (block, react, retaliate)
+            based on its own current state and that event, rather than needing a case written for each
+            specific ability. New abilities plug into the same event pipeline instead of requiring new
+            reaction code.
+          </p>
+          <p>
+            Combat interactions (hit detection, stagger, retaliation windows) were handled as their own
+            layer that both the player and enemy FSMs read from, so the same rules that make an enemy's
+            attack land also apply to the player — one combat model instead of separate player-side and
+            enemy-side logic.
+          </p>
+        </div>
+
+        <!-- RESULT -->
+        <div class="case-block result">
+          <span class="case-block-label">Result</span>
+          <h2>Enemies that react, not just execute animations</h2>
+          <p>
+            Enemies respond to player attacks and abilities through the shared event pipeline rather
+            than scripted per-encounter logic, and new abilities didn't require touching enemy code —
+            just emitting events on the same interface the FSM already listens to.
+          </p>
+        </div>
+
+        <!-- WHAT'S NEXT -->
+        <div class="case-next">
+          <h3>What I'd improve next</h3>
+          <p>
+            The FSM works well for the current move set, but as the number of enemy states grows,
+            a behaviour tree (or utility-based layer on top of the FSM) would make it easier to add
+            nuance — like an enemy choosing to disengage instead of always reacting — without the
+            state count exploding.
+          </p>
+        </div>
+
+        <!-- YOUR WORK -->
+        <div class="project-section">
+          <h2>My Contributions</h2>
+          <ul class="project-list">
+            <li>Built FSM-driven enemy behaviour reacting to a shared attack-event pipeline</li>
+            <li>Implemented attack event responses (block, react, retaliate)</li>
+            <li>Worked on combat interaction logic (hit detection, stagger, retaliation windows)</li>
+            <li>Programmed gameplay abilities that plug into the same event system</li>
+          </ul>
+        </div>
+
+        <!-- TECH FOCUS -->
+        <div class="project-section">
+          <h2>Technical Focus</h2>
+          <p>
+            Finite state machines, event-driven combat architecture, hit/response timing,
+            and ability systems designed to extend without touching enemy AI code.
+          </p>
+        </div>
+
+      </div>
+
+      <!-- SCREENSHOTS -->
+      <aside class="project-sidebar">
+        <p class="sidebar-label">Screenshots</p>
+        <div class="project-gallery">
+          <img src="../assets/nexus-of-warriors/screenshots/shot1.png" alt="Nexus of Warriors screenshot 1">
+          <img src="../assets/nexus-of-warriors/screenshots/shot2.png" alt="Nexus of Warriors screenshot 2">
+          <img src="../assets/nexus-of-warriors/screenshots/shot3.png" alt="Nexus of Warriors screenshot 3">
+        </div>
+      </aside>
+    </div>
+
+  </section>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox">
+    <img id="lightbox-img" src="" alt="">
+  </div>
+  <script>
+    document.querySelectorAll('.project-gallery img').forEach((img) => {
+      img.addEventListener('click', () => {
+        document.getElementById('lightbox-img').src = img.src;
+        document.getElementById('lightbox').classList.add('active');
+      });
+    });
+    document.getElementById('lightbox').addEventListener('click', () => {
+      document.getElementById('lightbox').classList.remove('active');
+    });
+  </script>
+
+  <!-- NOTE FOR TIAGO: this page didn't exist before (project1.html was empty), so this whole
+       case study is drafted from the project data in index.html + our chat. Replace the video
+       src, action links, and screenshot paths with your real assets, and check the "Approach"
+       section describes what you actually built — rewrite anything that doesn't match reality. -->
+
+</body>
+</html>
